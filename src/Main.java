@@ -1,172 +1,159 @@
 import javax.swing.JOptionPane;
 import Classes.Reclamacao;
 import Classes.Elogio;
+import Classes.Feedback;
 import Classes.Sugestao;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		String user;
-		String descricao;
-		int apagar;
-		int resp;
-		int opcao;
-		
-		List<String> Reclamacoes = new ArrayList<>();
-		List<String> Elogios = new ArrayList<>();
-		List<String> Sugestoes = new ArrayList<>();
-		
-		
-		JOptionPane.showMessageDialog(null, "Bem-vindo ao Sistema de Ouvidoria da Unifacisa! ");
-		
+        String user;
+        int opcao;
 
-		user = JOptionPane.showInputDialog("Digite o seu nome: ");
+        List<String> Reclamacoes = new ArrayList<>();
+        List<String> Elogios = new ArrayList<>();
+        List<String> Sugestoes = new ArrayList<>();
 
-		JOptionPane.showMessageDialog(null, "Seja Bem-Vindo! " + user);
-		
-		do {
-			
-			String opcaoStr = JOptionPane.showInputDialog(
-					"O que você deseja fazer ?\n\n"
-					+ "(1) Inserir\n"
-					+ "(2) Listar\n"
-					+ "(3) Apagar\n"
-					+ "(4) Editar\n"
-					+ "(5) Sair");
-			opcao = Integer.parseInt(opcaoStr);
-			
-			if(opcao == 1) {
-				 String respStr = JOptionPane.showInputDialog(null, "Escolha uma categoria : \n(1) Reclamação \n(2) Elogio \n(3) Sugestões" );
-				 resp = Integer.parseInt(respStr);
-				 
-				 if (resp == 1) {
-					 descricao =  JOptionPane.showInputDialog(null, "Digite sua reclamação: " );
-					 Reclamacao.adicionarFeedback(descricao, Reclamacoes);
-				 }
-				 else if (resp == 2) {
-					 descricao =  JOptionPane.showInputDialog(null, "Digite seu Elogio: " );
-					 Elogio.adicionarFeedback(descricao, Elogios);
-				 }
-				 else if (resp == 3) {
-					 descricao =  JOptionPane.showInputDialog(null, "Digite sua Sugestão: " );
-					 Sugestao.adicionarFeedback(descricao, Sugestoes);
-				 }
-				 else {
-					 JOptionPane.showMessageDialog(null, "Erro! Categoria não encontrada" );
-				 }
-			}
-			else if(opcao == 2) { 
-				JOptionPane.showMessageDialog(null, "Você deseja ? Listar" );
-				Reclamacao.listarFeedbacks(Reclamacoes, "Reclamações : ");
-				Elogio.listarFeedbacks(Elogios, "Elogios : ");
-				Sugestao.listarFeedbacks(Sugestoes, "Sugestões : ");
-			}
-			else if (opcao == 3) {
-			    String respStr = JOptionPane.showInputDialog(null, "Escolha uma categoria : \n(1) Reclamação \n(2) Elogio \n(3) Sugestões" );
-			    resp = Integer.parseInt(respStr);
-			    
-			    if (resp == 1) {
-			        Reclamacao.listarFeedbacks(Reclamacoes, "Reclamações ");
-			        String apagarStr = JOptionPane.showInputDialog(null, "Escolha uma opção para apagar: \n(1) Apagar todas as reclamações \n(2) Apagar uma reclamação específica");
-			        apagar = Integer.parseInt(apagarStr);
-			        if (apagar == 1) {
-			            Reclamacao.apagarTodasReclamacoes(Reclamacoes);
-			        } else if (apagar == 2) {
-			            Reclamacao.listarFeedbacks(Reclamacoes, "Reclamações  ");
-			            String reclamacao = JOptionPane.showInputDialog(null, "Digite o número da reclamação que deseja apagar : ");
-			            int indice = Integer.parseInt(reclamacao) - 1;
-			            Reclamacao.apagarReclamacao(indice, Reclamacoes);
-			            Reclamacao.listarFeedbacks(Reclamacoes, "Reclamações  ");
-			        } else {
-			            JOptionPane.showMessageDialog(null, "Opção inválida");
-			        }
-			    }
-			    if (resp == 2) {
-			        Reclamacao.listarFeedbacks(Elogios, "Elogios : ");
-			        String apagarStr = JOptionPane.showInputDialog(null, "Escolha uma opção para apagar: \n(1) Apagar todos os elogios \n(2) Apagar um elogio específico");
-			        apagar = Integer.parseInt(apagarStr);
-			        if (apagar == 1) {
-			            Elogio.apagarTodosELogios(Elogios);
-			        } else if (apagar == 2) {
-			            Reclamacao.listarFeedbacks(Elogios, "Elogios  ");
-			            String elogio = JOptionPane.showInputDialog(null, "Digite o número do Elogio que deseja apagar : ");
-			            int indice = Integer.parseInt(elogio) - 1;
-			            Elogio.apagarElogio(indice, Elogios);
-			            Elogio.listarFeedbacks(Elogios, "Elogios  ");
-			        } else {
-			            JOptionPane.showMessageDialog(null, "Opção inválida");
-			        }
-			    }
-			    if (resp == 3) {
-			        Reclamacao.listarFeedbacks(Sugestoes, "Sugestões ");
-			        String apagarStr = JOptionPane.showInputDialog(null, "Escolha uma opção para apagar: \n(1) Apagar todas as sugestçoes \n(2) Apagar uma sugestão específica");
-			        apagar = Integer.parseInt(apagarStr);
-			        if (apagar == 1) {
-			            Sugestao.apagarTodasSugestoes(Sugestoes);
-			        } else if (apagar == 2) {
-			            Reclamacao.listarFeedbacks(Sugestoes, "Sugestões  ");
-			            String sugestao = JOptionPane.showInputDialog(null, "Digite o número da Sugestão que deseja apagar : ");
-			            int indice = Integer.parseInt(sugestao) - 1;
-			            Sugestao.apagarSugestao(indice, Sugestoes);
-			            Reclamacao.listarFeedbacks(Sugestoes, "Sugestões  ");
-			        } else {
-			            JOptionPane.showMessageDialog(null, "Opção inválida");
-			        }
-			    }
-			    
-				 
-				
-			}
-			else if (opcao == 4) {
-			    String respStr = JOptionPane.showInputDialog(null, "Escolha uma categoria : \n(1) Reclamação \n(2) Elogio \n(3) Sugestões" );
-			    resp = Integer.parseInt(respStr);
-			    
-			    if (resp == 1) {
-			        Reclamacao.listarFeedbacks(Reclamacoes, "Reclamações ");
-			        String editarStr = JOptionPane.showInputDialog(null, "Digite o número da reclamação que deseja editar : ");
-			        int indice = Integer.parseInt(editarStr) - 1;
-			        if (indice >= 0 && indice < Reclamacoes.size()) {
-			            String novaDescricao = JOptionPane.showInputDialog(null, "Digite a nova descrição: ");
-			            Reclamacao.editarReclamacao(indice, novaDescricao, Reclamacoes);
-			        } else {
-			            JOptionPane.showMessageDialog(null, "Índice inválido.");
-			        }
-			    } else if (resp == 2) {
-			        Reclamacao.listarFeedbacks(Elogios, "Elogios ");
-			        String editarStr = JOptionPane.showInputDialog(null, "Digite o número do elogio que deseja editar : ");
-			        int indice = Integer.parseInt(editarStr) - 1;
-			        if (indice >= 0 && indice < Elogios.size()) {
-			            String novaDescricao = JOptionPane.showInputDialog(null, "Digite a nova descrição: ");
-			            Elogio.editarElogio(indice, novaDescricao, Elogios);
-			        } else {
-			            JOptionPane.showMessageDialog(null, "Índice inválido.");
-			        }
-			    } else if (resp == 3) {
-			        Reclamacao.listarFeedbacks(Sugestoes, "Sugestões ");
-			        String editarStr = JOptionPane.showInputDialog(null, "Digite o número da sugestão que deseja editar : ");
-			        int indice = Integer.parseInt(editarStr) - 1;
-			        if (indice >= 0 && indice < Sugestoes.size()) {
-			            String novaDescricao = JOptionPane.showInputDialog(null, "Digite a nova descrição: ");
-			            Sugestao.editarSugestao(indice, novaDescricao, Sugestoes);
-			        } else {
-			            JOptionPane.showMessageDialog(null, "Índice inválido.");
-			        }
-			    }	
-					
-			}
-			else if(opcao == 5) {
-				JOptionPane.showMessageDialog(null, "Você deseja ? Sair" );
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "ERRO : Opção Invalida!" );
-			}
-		
-		
-		} while (opcao !=5);
-		
-			JOptionPane.showMessageDialog(null, "Obrigado por ultilizar nossa Ouvidoria!  \n   © 2024 Babigol | Unifacisa" );
-	} 
+        JOptionPane.showMessageDialog(null, "Bem-vindo ao Sistema de Ouvidoria da Unifacisa!");
+
+        user = JOptionPane.showInputDialog("Digite o seu nome: ");
+
+        JOptionPane.showMessageDialog(null, "Seja Bem-Vindo! " + user);
+
+        do {
+
+            String opcaoStr = JOptionPane.showInputDialog(
+                    "O que você deseja fazer ?\n\n"
+                    + "(1) Inserir\n"
+                    + "(2) Listar\n"
+                    + "(3) Apagar\n"
+                    + "(4) Pesquisar\n"
+                    + "(5) Editar\n"
+                    + "(6) Sair");
+            opcao = Integer.parseInt(opcaoStr);
+
+            switch (opcao) {
+                case 1:
+                    inserirFeedback(Reclamacoes, Elogios, Sugestoes);
+                    break;
+                case 2:
+                    listarFeedbacks(Reclamacoes, Elogios, Sugestoes);
+                    break;
+                case 3:
+                    apagarFeedback(Reclamacoes, Elogios, Sugestoes);
+                    break;
+                case 4:
+                	buscarFeedback(Reclamacoes, Elogios, Sugestoes);
+                    break;
+                case 5:
+                    editarFeedback(Reclamacoes, Sugestoes, Elogios);
+                    break;
+                case 6:
+                    JOptionPane.showMessageDialog(null, "Você deseja sair ?");
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "ERRO: Opção Inválida!");
+            }
+
+        } while (opcao != 6);
+
+        JOptionPane.showMessageDialog(null, "Obrigado por utilizar nossa Ouvidoria! \n   © 2024 Babigol | Unifacisa");
+    }
+
+
+	// Inserir feedbacks
+    public static void inserirFeedback(List<String> Reclamacoes, List<String> Elogios, List<String> Sugestoes) {
+        String respStr = JOptionPane.showInputDialog(null, "Escolha uma categoria:\n(1) Reclamação\n(2) Elogio\n(3) Sugestões");
+        int resp = Integer.parseInt(respStr);
+
+        switch (resp) {
+            case 1:
+                Reclamacao.adicionarFeedback(JOptionPane.showInputDialog(null, "Digite sua reclamação: "), Reclamacoes);
+                break;
+            case 2:
+                Elogio.adicionarFeedback(JOptionPane.showInputDialog(null, "Digite seu Elogio: "), Elogios);
+                break;
+            case 3:
+                Sugestao.adicionarFeedback(JOptionPane.showInputDialog(null, "Digite sua Sugestão: "), Sugestoes);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Erro! Categoria não encontrada");
+        }
+    }
+
+    // Listar feedbacks
+    public static void listarFeedbacks(List<String> Reclamacoes, List<String> Elogios, List<String> Sugestoes) {
+        JOptionPane.showMessageDialog(null, "Você deseja listar:");
+        Reclamacao.listarFeedbacks(Reclamacoes, "Reclamações: ");
+        Elogio.listarFeedbacks(Elogios, "Elogios: ");
+        Sugestao.listarFeedbacks(Sugestoes, "Sugestões: ");
+    }
+
+ // Apagar feedbacks
+    public static void apagarFeedback(List<String> Reclamacoes, List<String> Elogios, List<String> Sugestoes) {
+        String categoria = JOptionPane.showInputDialog(null, "Escolha uma categoria:\n(1) Reclamações\n(2) Elogios\n(3) Sugestões\n(4) Todos");
+        int opcao = Integer.parseInt(categoria);
+
+        switch (opcao) {
+            case 1:
+                Reclamacao.listarFeedbacks(Reclamacoes, "Reclamações");
+                int indiceReclamacao = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número da reclamação que deseja apagar:")) - 1;
+                Reclamacao.apagarFeedback(indiceReclamacao, Reclamacoes, "Reclamações");
+                break;
+            case 2:
+                Elogio.listarFeedbacks(Elogios, "Elogios");
+                int indiceElogio = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número do elogio que deseja apagar:")) - 1;
+                Elogio.apagarFeedback(indiceElogio, Elogios, "Elogios");
+                break;
+            case 3:
+                Sugestao.listarFeedbacks(Sugestoes, "Sugestões");
+                int indiceSugestao = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número da sugestão que deseja apagar:")) - 1;
+                Sugestao.apagarFeedback(indiceSugestao, Sugestoes, "Sugestões");
+                break;
+            case 4:
+                apagarTodosFeedbacks(Reclamacoes, Elogios, Sugestoes);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida.");
+        }
+    }
+
+    // Apagar todos os feedbacks de todas as categorias
+    public static void apagarTodosFeedbacks(List<String> Reclamacoes, List<String> Elogios, List<String> Sugestoes) {
+        Reclamacao.apagarTodosFeedbacks(Reclamacoes, "Reclamações");
+        Elogio.apagarTodosFeedbacks(Elogios, "Elogios");
+        Sugestao.apagarTodosFeedbacks(Sugestoes, "Sugetões");
+    }
+
+    
+    // Editar feedbacks
+    public static void editarFeedback(List<String> Reclamacoes, List<String> Elogios, List<String> Sugestoes) {
+        String categoria = JOptionPane.showInputDialog(null, "Escolha uma categoria para editar:\n(1) Reclamações\n(2) Elogios\n(3) Sugestões");
+        int opcao = Integer.parseInt(categoria);
+
+        switch (opcao) {
+            case 1:
+                Feedback.editarFeedback(Reclamacoes, Elogios, Sugestoes, "Reclamações");
+                break;
+            case 2:
+                Feedback.editarFeedback(Reclamacoes, Elogios, Sugestoes, "Elogios");
+                break;
+            case 3:
+                Feedback.editarFeedback(Reclamacoes, Elogios, Sugestoes, "Sugestões");
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida.");
+        }
+    }
+
+    // Buscar feedbacks
+    public static void buscarFeedback(List<String> Reclamacoes, List<String> Elogios, List<String> Sugestoes) {
+        String codigo = JOptionPane.showInputDialog(null, "Digite o código do feedback que deseja pesquisar:");
+        Feedback.buscarFeedback(codigo);
+    }
+    
+
 }
