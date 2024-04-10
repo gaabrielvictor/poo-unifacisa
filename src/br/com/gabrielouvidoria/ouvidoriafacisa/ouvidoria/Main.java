@@ -1,8 +1,10 @@
+package br.com.gabrielouvidoria.ouvidoriafacisa.ouvidoria;
+
 import javax.swing.JOptionPane;
-import Classes.Reclamacao;
-import Classes.Elogio;
-import Classes.Feedback;
-import Classes.Sugestao;
+import br.com.gabrielouvidoria.ouvidoriafacisa.entidades.Reclamacao;
+import br.com.gabrielouvidoria.ouvidoriafacisa.entidades.Elogio;
+import br.com.gabrielouvidoria.ouvidoriafacisa.entidades.Feedback;
+import br.com.gabrielouvidoria.ouvidoriafacisa.entidades.Sugestao;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +67,7 @@ public class Main {
 
 
 	// Inserir feedbacks
+    
     public static void inserirFeedback(List<String> Reclamacoes, List<String> Elogios, List<String> Sugestoes) {
         String respStr = JOptionPane.showInputDialog(null, "Escolha uma categoria:\n(1) Reclamação\n(2) Elogio\n(3) Sugestões");
         int resp = Integer.parseInt(respStr);
@@ -85,6 +88,7 @@ public class Main {
     }
 
     // Listar feedbacks
+    
     public static void listarFeedbacks(List<String> Reclamacoes, List<String> Elogios, List<String> Sugestoes) {
         JOptionPane.showMessageDialog(null, "Você deseja listar:");
         Reclamacao.listarFeedbacks(Reclamacoes, "Reclamações: ");
@@ -92,7 +96,8 @@ public class Main {
         Sugestao.listarFeedbacks(Sugestoes, "Sugestões: ");
     }
 
- // Apagar feedbacks
+    // Apagar feedbacks
+    
     public static void apagarFeedback(List<String> Reclamacoes, List<String> Elogios, List<String> Sugestoes) {
         String categoria = JOptionPane.showInputDialog(null, "Escolha uma categoria:\n(1) Reclamações\n(2) Elogios\n(3) Sugestões\n(4) Todos");
         int opcao = Integer.parseInt(categoria);
@@ -122,6 +127,7 @@ public class Main {
     }
 
     // Apagar todos os feedbacks de todas as categorias
+    
     public static void apagarTodosFeedbacks(List<String> Reclamacoes, List<String> Elogios, List<String> Sugestoes) {
         Reclamacao.apagarTodosFeedbacks(Reclamacoes, "Reclamações");
         Elogio.apagarTodosFeedbacks(Elogios, "Elogios");
@@ -130,6 +136,7 @@ public class Main {
 
     
     // Editar feedbacks
+    
     public static void editarFeedback(List<String> Reclamacoes, List<String> Elogios, List<String> Sugestoes) {
         String categoria = JOptionPane.showInputDialog(null, "Escolha uma categoria para editar:\n(1) Reclamações\n(2) Elogios\n(3) Sugestões");
         int opcao = Integer.parseInt(categoria);
@@ -150,6 +157,7 @@ public class Main {
     }
 
     // Buscar feedbacks
+    
     public static void buscarFeedback(List<String> Reclamacoes, List<String> Elogios, List<String> Sugestoes) {
         String codigo = JOptionPane.showInputDialog(null, "Digite o código do feedback que deseja pesquisar:");
         Feedback.buscarFeedback(codigo);

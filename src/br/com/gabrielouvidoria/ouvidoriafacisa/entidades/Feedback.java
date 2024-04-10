@@ -1,4 +1,4 @@
-package Classes;
+package br.com.gabrielouvidoria.ouvidoriafacisa.entidades;
 
 import javax.swing.JOptionPane;
 import java.util.HashMap;
@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class Feedback {
-    private static Map<String, String> codigoFeedback = new HashMap<>();
+    
+	private static Map<String, String> codigoFeedback = new HashMap<>();
 
     // Função para adicionar a descrição à lista correspondente
+    
     public static void adicionarFeedback(String descricao, List<String> lista) {
         String codigo = gerarCodigo();
         lista.add(descricao);
@@ -16,14 +18,19 @@ public abstract class Feedback {
         JOptionPane.showMessageDialog(null, "Feedback adicionado com sucesso! Código: " + codigo);
     }
 
- // Função para listar os feedbacks de uma determinada categoria
+    // Função para listar os feedbacks de uma determinada categoria
+   
     public static void listarFeedbacks(List<String> lista, String categoria) {
-        if (lista.isEmpty()) {
+        
+    	if (lista.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Não há feedbacks para a categoria " + categoria);
             return;
+        } else {
+            JOptionPane.showMessageDialog(null, "Índice inválido.");
         }
 
-        StringBuilder feedbacks = new StringBuilder("Feedbacks de " + categoria + ":\n\n");
+    	StringBuilder feedbacks = new StringBuilder("Feedbacks de " + categoria + ":\n\n");
+        
         for (int i = 0; i < lista.size(); i++) {
             String descricao = lista.get(i);
             String codigo = buscarCodigoPorDescricao(descricao);
@@ -33,8 +40,10 @@ public abstract class Feedback {
     }
 
     // Função para apagar todos os feedbacks de uma categoria
+    
     public static void apagarTodosFeedbacks(List<String> lista, String categoria) {
-        if (!lista.isEmpty()) {
+        
+    	if (!lista.isEmpty()) {
             lista.clear();
             codigoFeedback.clear();
             JOptionPane.showMessageDialog(null, "Todos os(as) " + categoria + " foram apagados(as) com sucesso!");
@@ -43,9 +52,11 @@ public abstract class Feedback {
         }
     }
 
-    // Função para apagar um feedback específico pelo índice da lista
+    // Função para apagar um feedback
+    
     public static void apagarFeedback(int indice, List<String> lista, String categoria) {
-        if (indice >= 0 && indice < lista.size()) {
+        
+    	if (indice >= 0 && indice < lista.size()) {
             String descricao = lista.get(indice);
             String codigo = buscarCodigoPorDescricao(descricao);
             lista.remove(indice);
@@ -56,7 +67,8 @@ public abstract class Feedback {
         }
     }
 
- // Função para editar feedbacks
+    // Função para editar feedbacks
+    
     public static void editarFeedback(List<String> reclamacoes, List<String> elogios, List<String> sugestoes, String categoria) {
         JOptionPane.showMessageDialog(null, "Você deseja editar " + categoria + ":");
 
@@ -82,6 +94,7 @@ public abstract class Feedback {
         }
 
         int indice = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número do " + categoria + " que deseja editar:")) - 1;
+        
         if (indice >= 0 && indice < lista.size()) {
             String descricaoAntiga = lista.get(indice);
             String codigo = buscarCodigoPorDescricao(descricaoAntiga);
@@ -95,8 +108,11 @@ public abstract class Feedback {
     }
 
     // Função para buscar feedback por código
+    
     public static void buscarFeedback(String codigo) {
-        String descricao = codigoFeedback.get(codigo);
+        
+    	String descricao = codigoFeedback.get(codigo);
+        
         if (descricao != null) {
             JOptionPane.showMessageDialog(null, "Código: " + codigo + "\nDescrição: " + descricao);
         } else {
@@ -105,17 +121,21 @@ public abstract class Feedback {
     }
 
     // Função para gerar um código único para cada feedback
+    
     private static String gerarCodigo() {
         return "" + (codigoFeedback.size() + 1);
     }
 
     // Função para buscar o código de um feedback pela descrição
     private static String buscarCodigoPorDescricao(String descricao) {
-        for (Map.Entry<String, String> entry : codigoFeedback.entrySet()) {
-            if (entry.getValue().equals(descricao)) {
+        
+    	for (Map.Entry<String, String> entry : codigoFeedback.entrySet()) {
+            
+    		if (entry.getValue().equals(descricao)) {
                 return entry.getKey();
             }
         }
-        return null;
+        
+    	return null;
     }
 }
